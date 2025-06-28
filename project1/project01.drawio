@@ -1,0 +1,67 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36" version="26.1.1">
+  <diagram name="Page-1" id="HEk_gDEYIwtdrfaeBhZe">
+    <mxGraphModel dx="578" dy="367" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Fgoe9fkGKEXaFKdTIsvn-26" value="TODO APP" style="rounded=1;whiteSpace=wrap;html=1;arcSize=7;labelPosition=center;verticalLabelPosition=bottom;align=center;verticalAlign=top;spacingTop=-28;spacingBottom=0;spacingLeft=0;labelBackgroundColor=default;" vertex="1" parent="1">
+          <mxGeometry x="25" y="50" width="800" height="640" as="geometry" />
+        </mxCell>
+        <mxCell id="Fgoe9fkGKEXaFKdTIsvn-7" value="task list container &amp;lt;div&amp;gt;" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;fillColor=none;arcSize=8;verticalAlign=top;labelPosition=right;verticalLabelPosition=bottom;align=left;strokeWidth=2;labelBackgroundColor=default;" vertex="1" parent="1">
+          <mxGeometry x="160" y="310" width="520" height="310" as="geometry" />
+        </mxCell>
+        <mxCell id="Fgoe9fkGKEXaFKdTIsvn-25" value="task list&amp;nbsp; &amp;lt;ul&amp;gt;" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;fillColor=none;arcSize=3;verticalAlign=top;labelPosition=right;verticalLabelPosition=bottom;align=left;strokeWidth=2;labelBackgroundColor=default;" vertex="1" parent="1">
+          <mxGeometry x="180" y="390" width="480" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="Fgoe9fkGKEXaFKdTIsvn-6" value="new task &amp;lt;div&amp;gt;" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;fillColor=none;arcSize=15;verticalAlign=top;labelPosition=right;verticalLabelPosition=bottom;align=left;strokeWidth=2;labelBackgroundColor=default;" vertex="1" parent="1">
+          <mxGeometry x="160" y="80" width="520" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="Fgoe9fkGKEXaFKdTIsvn-8" value="task description" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="190" y="410" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Fgoe9fkGKEXaFKdTIsvn-12" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="225" y="145" width="390" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Fgoe9fkGKEXaFKdTIsvn-10" value="new task input field&amp;nbsp;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="Fgoe9fkGKEXaFKdTIsvn-12">
+          <mxGeometry width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Fgoe9fkGKEXaFKdTIsvn-11" value="ADD" style="rounded=1;whiteSpace=wrap;html=1;fillColor=light-dark(#FFFFFF,#FFFFFF);fontColor=light-dark(#000000,#000000);" vertex="1" parent="Fgoe9fkGKEXaFKdTIsvn-12">
+          <mxGeometry x="310" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Fgoe9fkGKEXaFKdTIsvn-13" value="DONE" style="rounded=1;whiteSpace=wrap;html=1;fillColor=light-dark(#FFFFFF,#FFFFFF);fontColor=light-dark(#000000,#000000);" vertex="1" parent="1">
+          <mxGeometry x="480" y="410" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Fgoe9fkGKEXaFKdTIsvn-14" value="DELETE" style="rounded=1;whiteSpace=wrap;html=1;fillColor=light-dark(#FFFFFF,#FFFFFF);fontColor=light-dark(#000000,#000000);" vertex="1" parent="1">
+          <mxGeometry x="570" y="410" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Fgoe9fkGKEXaFKdTIsvn-15" value="task description" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="190" y="460" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Fgoe9fkGKEXaFKdTIsvn-16" value="DONE" style="rounded=1;whiteSpace=wrap;html=1;fillColor=light-dark(#FFFFFF,#FFFFFF);fontColor=light-dark(#000000,#000000);" vertex="1" parent="1">
+          <mxGeometry x="480" y="460" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Fgoe9fkGKEXaFKdTIsvn-17" value="DELETE" style="rounded=1;whiteSpace=wrap;html=1;fillColor=light-dark(#FFFFFF,#FFFFFF);fontColor=light-dark(#000000,#000000);" vertex="1" parent="1">
+          <mxGeometry x="570" y="460" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Fgoe9fkGKEXaFKdTIsvn-18" value="task description (DONE)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="190" y="510" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Fgoe9fkGKEXaFKdTIsvn-20" value="DELETE" style="rounded=1;whiteSpace=wrap;html=1;fillColor=light-dark(#FFFFFF,#FFFFFF);fontColor=light-dark(#000000,#000000);" vertex="1" parent="1">
+          <mxGeometry x="570" y="510" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Fgoe9fkGKEXaFKdTIsvn-22" value="ALL" style="rounded=1;whiteSpace=wrap;html=1;fillColor=light-dark(#FFFFFF,#FFFFFF);fontColor=light-dark(#000000,#000000);" vertex="1" parent="1">
+          <mxGeometry x="280" y="330" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Fgoe9fkGKEXaFKdTIsvn-23" value="DONE" style="rounded=1;whiteSpace=wrap;html=1;fillColor=light-dark(#FFFFFF,#FFFFFF);fontColor=light-dark(#000000,#000000);" vertex="1" parent="1">
+          <mxGeometry x="380" y="330" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Fgoe9fkGKEXaFKdTIsvn-24" value="UNDONE" style="rounded=1;whiteSpace=wrap;html=1;fillColor=light-dark(#FFFFFF,#FFFFFF);fontColor=light-dark(#000000,#000000);" vertex="1" parent="1">
+          <mxGeometry x="480" y="330" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Fgoe9fkGKEXaFKdTIsvn-27" value="UNDONE" style="rounded=1;whiteSpace=wrap;html=1;fillColor=light-dark(#FFFFFF,#FFFFFF);fontColor=light-dark(#000000,#000000);" vertex="1" parent="1">
+          <mxGeometry x="480" y="510" width="80" height="40" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
