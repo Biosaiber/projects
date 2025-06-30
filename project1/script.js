@@ -16,7 +16,7 @@ function renderTodos(todos) {
   list.innerHTML = ""; // clear list
 
   todos.forEach(todo =>{
-    const li = createElement("li");
+    const li = document.createElement("li");
     li.textContent = todo.text;
     list.appendChild(li);
   });
