@@ -13,6 +13,8 @@ function createTodo(text) {
 
 // 💾 Funkcia na uloženie aktuálneho zoznamu úloh do localStorage
 function saveTodosToLocalStorage() {
+  // 💾 Uloží aktuálny stav zoznamu do localStorage ako string
+  // Uložením celého taskList prepíšeme staršiu verziu – tým sa "zmaže" aj vymazaná úloha
   localStorage.setItem("todos", JSON.stringify(taskList)); // prevedieme pole na string a uložíme pod kľúčom "todos"
 }
 
