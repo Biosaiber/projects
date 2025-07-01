@@ -40,13 +40,12 @@ let currentFilter = "all"; // predvolene zobrazíme všetko
 // 🔧 Pomocná funkcia, ktorá vráti pole úloh podľa zvoleného filtra
 function getFilteredTodos() {
   if (currentFilter === "completed") {
-    return taskList.filter(todo => todo.completed);
+    return taskList.filter((todo) => todo.completed);
   } else if (currentFilter === "active") {
-    return taskList.filter(todo => !todo.completed);
+    return taskList.filter((todo) => !todo.completed);
   }
   return taskList; // default: všetko
 }
-
 
 const taskList = []; // hlavný zoznam úloh (pamäť aplikácie)
 
@@ -113,4 +112,19 @@ addButton.addEventListener("click", () => {
   input.value = ""; // vyčistíme input
 });
 
+// filtrovanie
 
+document.getElementById("filter_all").addEventListener("click", () => {
+  currentFilter = "all"; // zobrazí všetko
+  renderTodos(getFilteredTodos());
+});
+
+document.getElementById("filter_done").addEventListener("click", () => {
+  currentFilter = "completed"; // zobrazí len hotové
+  renderTodos(getFilteredTodos());
+});
+
+document.getElementById("filter_undone").addEventListener("click", () => {
+  currentFilter = "active"; // zobrazí len nehotové
+  renderTodos(getFilteredTodos());
+});
