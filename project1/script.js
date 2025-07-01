@@ -25,9 +25,28 @@ function loadTodosFromLocalStorage() {
   if (saved) {
     const parsed = JSON.parse(saved); // prevedieme string naspäť na pole objektov
     taskList.push(...parsed); // vložíme načítané úlohy do nášho zoznamu
-    renderTodos(taskList); // vykreslíme úlohy do DOMu
+    renderTodos(getFilteredTodos()); // zobrazíme filtrovaný zoznam (napr. všetky)
   }
 }
+
+// FILTROVANIE
+// "all" = všetky úlohy
+// "completed" = len hotové
+// "active" = len nehotové
+
+// 🔧 Pridáme premenú pre aktuálny filter:
+let currentFilter = "all"; // predvolene zobrazíme všetko
+
+// 🔧 Pomocná funkcia, ktorá vráti pole úloh podľa zvoleného filtra
+function getFilteredTodos() {
+  if (currentFilter === "completed") {
+    return taskList.filter(todo => todo.completed);
+  } else if (currentFilter === "active") {
+    return taskList.filter(todo => !todo.completed);
+  }
+  return taskList; // default: všetko
+}
+
 
 const taskList = []; // hlavný zoznam úloh (pamäť aplikácie)
 
@@ -44,7 +63,7 @@ function renderTodos(todos) {
     checkbox.checked = todo.completed; // nastavíme, či je zaškrtnutý
     checkbox.addEventListener("change", () => {
       todo.completed = checkbox.checked; // aktualizujeme stav úlohy
-      renderTodos(taskList); // znova prekreslíme
+      renderTodos(getFilteredTodos());
       saveTodosToLocalStorage(); // uložíme zmenu do storage
     });
 
@@ -61,7 +80,7 @@ function renderTodos(todos) {
       const index = taskList.findIndex((t) => t.id === todo.id); // nájdeme index úlohy
       if (index !== -1) {
         taskList.splice(index, 1); // vymažeme úlohu zo zoznamu
-        renderTodos(taskList); // znova prekreslíme
+        renderTodos(getFilteredTodos()); // znova prekreslíme
         saveTodosToLocalStorage(); // uložíme zmenu
       }
     });
@@ -89,7 +108,9 @@ addButton.addEventListener("click", () => {
 
   const newTask = createTodo(text); // vytvoríme novú úlohu
   taskList.push(newTask); // pridáme do zoznamu
-  renderTodos(taskList); // vykreslíme
+  renderTodos(getFilteredTodos()); // vykreslíme
   saveTodosToLocalStorage(); // uložíme do localStorage
   input.value = ""; // vyčistíme input
 });
+
+
