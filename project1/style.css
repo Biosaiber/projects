@@ -4,9 +4,45 @@
 
 li input[type="checkbox"] {
   float: left;
+  margin-right: 8px;
 }
 
 #todo-list {
   list-style: none;
   padding-left: 0;
 }
+h1 {
+  text-align: center;
+}
+.newtask,
+.tasks_container {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.newtask {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+
+}
+
+
+#todo-input {
+  width: 100%;
+  max-width: 400px;
+  margin-right: 16px;
+}
+
+.task_filter {
+  display: flex;
+  justify-content: center;
+}
+.task_filter button {
+  margin-right: 10px;
+}
+
+.task_filter button:last-child {
+  margin-right: 0px;
+}
+
