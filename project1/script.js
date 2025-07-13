@@ -56,6 +56,7 @@ function renderTodos(todos) {
 
   todos.forEach((todo) => {
     const li = document.createElement("li"); // vytvoríme nový <li> pre každú úlohu
+    li.setAttribute("data-status", todo.completed ? "done" : "undone");
 
     const checkbox = document.createElement("input"); // vytvoríme checkbox
     checkbox.type = "checkbox";
@@ -68,13 +69,10 @@ function renderTodos(todos) {
 
     const p = document.createElement("p"); // vytvoríme <p> pre text úlohy
     p.textContent = todo.text;
-    if (todo.completed) {
-      p.style.textDecoration = "line-through"; // ak je hotová, prečiarkneme text
-    }
 
     const deleteBtn = document.createElement("button"); // tlačidlo na zmazanie
     deleteBtn.textContent = "🗑️";
-    deleteBtn.setAttribute("aria-label", "Zmazať úlohu"); // pre čítačky obrazovky
+    deleteBtn.setAttribute("aria-label", "delete task"); // pre čítačky obrazovky
     deleteBtn.addEventListener("click", () => {
       const index = taskList.findIndex((t) => t.id === todo.id); // nájdeme index úlohy
       if (index !== -1) {
