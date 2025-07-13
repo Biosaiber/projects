@@ -1,10 +1,8 @@
-* {
+/* * {
   outline: 1px solid #bada44;
-}
-
-li input[type="checkbox"] {
-  float: left;
-  margin-right: 8px;
+} */
+body {
+  font-family: monospace;
 }
 
 #todo-list {
@@ -24,14 +22,20 @@ h1 {
   display: flex;
   justify-content: center;
   margin-bottom: 16px;
-
 }
-
 
 #todo-input {
   width: 100%;
   max-width: 400px;
-  margin-right: 16px;
+  margin-right: 8px;
+  height: 2rem;
+  border: 1px solid #000;
+  border-radius: 8px;
+  padding-left: 8px;
+}
+#add-task {
+  border-radius: 8px;
+  border: 1px solid #000;
 }
 
 .task_filter {
@@ -39,10 +43,46 @@ h1 {
   justify-content: center;
 }
 .task_filter button {
-  margin-right: 10px;
+  margin-right: 8px;
+  height: 2rem;
+  border-radius: 8px;
+  border: 1px solid #000;
 }
 
 .task_filter button:last-child {
   margin-right: 0px;
 }
 
+#todo-list li {
+  display: flex;
+  margin-bottom: 16px;
+  border: 1px solid #8a8a8a;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+#todo-list li input[type="checkbox"] {
+  margin: 0;
+  align-self: flex-start;
+  margin-top: 1px;
+}
+#todo-list li p {
+  margin: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+#todo-list li[data-status="done"] p {
+  text-decoration: line-through;
+  color: rgba(0, 0, 0, 0.5);
+}
+#todo-list li[data-status="done"] {
+  border-color: #66ba2f;
+  background-color: rgba(128, 234, 128, 0.5);
+}
+
+#todo-list li p + button {
+  align-self: baseline;
+  padding: 0;
+  margin-left: auto;
+  font-size: 0.4rem;
+}
