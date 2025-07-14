@@ -2,6 +2,11 @@
 
 console.log("script loaded"); // log do konzoly že sa skript načítal
 
+// 1️⃣ Automatický focus na input po načítaní stránky
+window.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("todo-input").focus();
+});
+
 // 🏭 Factory funkcia na vytvorenie novej úlohy
 function createTodo(text) {
   return {
@@ -94,7 +99,19 @@ loadTodosFromLocalStorage(); // načítame úlohy po načítaní stránky
 
 // 🧾 Pridávanie novej úlohy po kliknutí na tlačidlo
 const input = document.getElementById("todo-input"); // input pre text úlohy
+
 const addButton = document.getElementById("add-task"); // tlačidlo "Pridať úlohu"
+
+// ⌨️ Pridanie úlohy aj klávesou Enter (len ak je nejaký text)
+input.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    const text = input.value.trim();
+    if (text !== "") {
+      addButton.click();
+    }
+  }
+});
 
 addButton.addEventListener("click", () => {
   const text = input.value.trim(); // zoberieme text z inputu a odstránime medzery
@@ -108,6 +125,7 @@ addButton.addEventListener("click", () => {
   renderTodos(getFilteredTodos()); // vykreslíme
   saveTodosToLocalStorage(); // uložíme do localStorage
   input.value = ""; // vyčistíme input
+  input.focus(); // 🔁 focus späť na input po pridaní úlohy
 });
 
 // filtrovanie
