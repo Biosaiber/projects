@@ -21,6 +21,9 @@ body {
 #todo-list {
   list-style: none;
   padding-left: 0;
+  display: flex;
+    flex-wrap: wrap;
+    flex-direction: column-reverse;
 }
 h1 {
   text-align: center;
