@@ -44,8 +44,19 @@ function displayResult(data) {
 
 // Error handling a loading stav
 
+// Loading
+function showloading(show) {
+    document.getElementById("loading").style.display = show ? "block" : "none";
+}
+
+// Error messsage
 function showError(message) {
-    const errDic = document.getElementById("error");
-    errDiv.textContent = message;
+    const errDiv = document.getElementById("error");
     errDiv.style.display = "block";
+    errDiv.textContent = message;
+}
+
+// Clear error message
+function hideError() {
+  document.getElementById("error").style.display = "none";
 }
