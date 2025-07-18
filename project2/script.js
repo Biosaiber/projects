@@ -2,12 +2,12 @@ console.log("script loaded");
 
 
 // Zachycujem klik na button, načítavam hodnotu z inputu, spustim fetch.
-document.getElementById("searchInput").addEventListener("click", () => {
-    const name = document.getElementById("searchInput").value.trim().toLowerCase();
-    if (!name) return;
-    // fetchPokemon(name);
-    console.log("fetchPokemon");
-})
+
+document.getElementById("searchBtn").addEventListener("click", () => {
+  const name = document.getElementById("searchInput").value.trim().toLowerCase();
+  if (!name) return;
+  fetchPokemon(name);
+});
 
 
 // using async/await alebo na zavolanie API
