@@ -17,12 +17,13 @@ async function fetchPokemon(name) {
         hideError();
 
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
-        if (!response.ok) throw new Error("Pokemon not found");
+        if (!response.ok) throw new Error(`Pokemon "${name}" not found`);
         const data = await response.json();
-        console.log(pokemon);
+        console.log(data);
         displayResult(data);
     } catch(err) {
-        showError(err.message);
+        console.error("Chyba pri fetche:", err); // užitočné počas vývoja
+        showError(err.message); // zobrazí sa na stránke
     } finally {
         showloading(false);
     }
