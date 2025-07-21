@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Excel Filter Tool</title>
+</head>
+<body>
+  <h2>🔍 Add Filter</h2>
+  <input type="text" id="descInput" placeholder="Enter description value..." />
+  <button onclick="addDescription()">Add</button>
+  <button onclick="exportFiltersToJson()">💾 Export Filters to JSON</button>
+
+  <ul id="filterList"></ul>
+
+  <h2>📂 Upload Excel Report</h2>
+  <label class="drop-zone" id="excel-drop">Drag and drop Excel file here
+    <input type="file" id="excel-file" accept=".xlsx,.xls" hidden>
+  </label>
+  <div id="fileStatus">📁 No file uploaded yet</div>
+
+  <button onclick="filterReport()">🔍 Filter Report</button>
+
+  <h2>📋 Filtered Results</h2>
+  <div id="resultContainer"></div>
+</body>
+<script src="script.js"></script>
+</html>
