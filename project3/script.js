@@ -14,7 +14,7 @@ async function fetchWeather(place) {
         showLoading(true);
         hideError();
 
-        const url = `https://api.openweathermap.org/data/2.5/weather?q=${place}&units=metric&appid=${apiKey}`;
+        const url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${place}`;
         const response = await fetch(url);
 
         if (!response.ok) throw new Error(`Weather for "${place}" not found`);
