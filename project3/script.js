@@ -14,19 +14,32 @@ async function fetchWeather(place) {
         showLoading(true);
         hideError();
 
-        const url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${place}`;
+        const url = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${place}&days=7`;
         const response = await fetch(url);
 
         if (!response.ok) throw new Error(`Weather for "${place}" not found`);
 
         const data = await response.json();
         console.log(data);
+        displayResult(data);
+        
     } catch(err) {
         console.error("Chyba pri fetche:", err);
         showError(err.message);
     } finally {
         showLoading(false);
     }
+}
+
+function displayResult(data) {
+    const container = document.getElementById("result");
+    container.innerHTML = `
+        <h2>${data.location.name}</h2>
+        <p>Temperature: ${data.current.temp_c}°C</p>
+        <p>Condition: ${data.current.condition.text}</p>
+        <p>Condition: ${data.forecastDay.date}</p>
+        <img src="${data.current.condition.icon}" alt="${data.current.condition.text}" />
+    `;
 }
 
 function showLoading(show) {
@@ -42,3 +55,6 @@ function showError(message) {
 function hideError() {
     document.getElementById("error").style.display = "none";
 }
+
+
+// https://www.weatherapi.com/docs/
