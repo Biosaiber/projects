@@ -1,0 +1,23 @@
+body {
+    background: #8edcff;
+}
+.hourlycast, .forecast {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.hour, .day {
+    width: 132px;
+    margin-bottom: 4px;
+    border: 1px solid #d7d7d7;
+    border-radius: 16px;
+    padding: 4px;
+    background: #f7feff;
+}
+.hour[data-now="true"] {
+    background: #00000016;
+}
+.hour img, .day img {
+    height: 32px;
+    width: 32px;
+}
