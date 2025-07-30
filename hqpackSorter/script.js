@@ -41,7 +41,7 @@ function renderFilterList() {
     const li = document.createElement("li");
     li.innerHTML = `${desc} <button onclick="removeDescription(${descriptions.indexOf(
       desc
-    )})">🗑️</button>`;
+    )})">x</button>`;
     ul.appendChild(li);
   });
 }
