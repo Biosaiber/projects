@@ -1,31 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
-    <link rel="stylesheet" href="style.css">
-    <title>Excel Filter Tool</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Excel Report Filter</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h2>🔍 Add Filter</h2>
-  <input type="text" id="descInput" placeholder="Enter description value..." />
-  <button onclick="addDescription()">Add</button>
-  <button onclick="exportFiltersToJson()">💾 Export Filters to JSON</button>
+  <h1>📁 Excel Report Filter</h1>
 
-  <ul id="filterList"></ul>
+  <section>
+    <h2>📝 Filter Entries</h2>
+    <input id="descInput" placeholder="Enter description..." />
+    <button onclick="addDescription()">Add</button>
+    <button onclick="groupSelectedItems()">Group Selected</button>
+    <hr>
+    <input id="json-upload" type="file" accept="application/json" />
+    <button onclick="importJsonFile()">📂 Import JSON</button>
+        <button onclick="exportFiltersToJson()">💾 Export to JSON</button>
+    <ul id="filterList"></ul>
+  </section>
 
-  <h2>📂 Upload Excel Report</h2>
-  <label class="drop-zone" id="excel-drop">Drag and drop Excel file here
-    <input type="file" id="excel-file" accept=".xlsx,.xls" hidden>
-  </label>
-  <div id="fileStatus">📁 No file uploaded yet</div>
+  <section>
+    <h2>📂 Upload Excel File</h2>
+    <div id="excel-drop" class="dropzone">Click or Drop Excel File Here</div>
+    <input id="excel-file" type="file" accept=".xlsx" style="display: none" />
+    <p id="fileStatus">No file uploaded yet.</p>
+    <button onclick="filterReport()">🔍 Filter Report</button>
+  </section>
 
-  <button onclick="filterReport()">🔍 Filter Report</button>
+  <section>
+    <h2>📋 Filtered Results</h2>
+    <div id="resultContainer"></div>
+  </section>
 
-  <h2>📋 Filtered Results</h2>
-  <div id="resultContainer"></div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="script.js"></script>
 </body>
-<script src="script.js"></script>
 </html>

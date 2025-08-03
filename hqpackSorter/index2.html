@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Excel Filter Tool</title>
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
+  <style>
+    body {{ font-family: sans-serif; padding: 2rem; background: #f4f4f4; }}
+    h2 {{ margin-top: 2rem; }}
+    input[type="text"] {{ padding: 0.5rem; width: 300px; }}
+    button {{ padding: 0.5rem 1rem; margin: 0.5rem 0; }}
+    ul {{ background: #fff; padding: 1rem; list-style: none; margin: 1rem 0; border: 1px solid #ccc; }}
+    li {{ margin: 0.25rem 0; display: flex; justify-content: space-between; }}
+    .drop-zone {{ border: 2px dashed #888; padding: 2rem; background: #fff; margin-bottom: 1rem; text-align: center; cursor: pointer; }}
+    #fileStatus {{ margin: 0.5rem 0; font-weight: bold; color: #007bff; }}
+    table {{ border-collapse: collapse; width: 100%; background: white; margin-top: 1rem; }}
+    th, td {{ border: 1px solid #ccc; padding: 0.5rem; text-align: left; }}
+    th {{ background: #eee; }}
+    li.selected {{ background: #cce5ff; }}
+  </style>
+</head>
+<body>
+  <h2>🔍 Add Filter</h2>
+  <input type="text" id="descInput" placeholder="Enter description value..." />
+  <button onclick="addDescription()">Add</button>
+  <button onclick="exportFiltersToJson()">💾 Export Filters to JSON</button>
+  <button onclick="groupSelectedItems()">📦 Group Selected</button>
+
+  <ul id="filterList"></ul>
+
+  <h2>📂 Upload Excel Report</h2>
+  <label class="drop-zone" id="excel-drop">Drag and drop Excel file here
+    <input type="file" id="excel-file" accept=".xlsx,.xls" hidden>
+  </label>
+  <div id="fileStatus">📁 No file uploaded yet</div>
+
+  <button onclick="filterReport()">🔍 Filter Report</button>
+
+  <h2>📦 Filter Groups</h2>
+  <ul id="groupList"></ul>
+
+  <h2>📋 Filtered Results</h2>
+  <div id="resultContainer"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

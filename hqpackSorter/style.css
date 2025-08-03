@@ -85,3 +85,10 @@ border-radius: 8px;
     padding-left: 2px;
     padding-right: 2px;
 }
+
+#filterList li.selected {
+  border-color: #ef3931;
+}
+#filterList ul {
+  padding: 0;
+} 
