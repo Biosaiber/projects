@@ -59,6 +59,7 @@ th {
 #filterList {
       display: flex;
     flex-wrap: wrap;
+    align-items: flex-start;
     max-height: 200px;
     overflow-y: scroll;
 }
@@ -69,13 +70,17 @@ th {
     border: 1px solid #a2a2a2;
     border-radius: 7px;
     margin: 4px;
+        align-items: center;
+}
+
+#filterList li[data-flow="push-item"] {
+  background-color: #eef7aa;
 }
 
 #filterList li button {
   padding: 0;
     margin-top: 0;
     margin-bottom: 0;
-    line-height: 0;
    margin-left: 3px;
     background-color: #ef3931;
     border: 1px solid #ef3931;
@@ -90,5 +95,8 @@ border-radius: 8px;
   border-color: #ef3931;
 }
 #filterList ul {
+  display: flex;
   padding: 0;
+  margin-top: 0;
+  margin-bottom: 0;
 } 
