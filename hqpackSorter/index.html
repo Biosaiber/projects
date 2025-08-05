@@ -13,11 +13,13 @@
     <h2>📝 Filter Entries</h2>
     <input id="descInput" placeholder="Enter description..." />
     <button onclick="addDescription()">Add</button>
-    <button onclick="groupSelectedItems()">Group Selected</button>
+
     <hr>
     <input id="json-upload" type="file" accept="application/json" />
-    <button onclick="importJsonFile()">📂 Import JSON</button>
-        <button onclick="exportFiltersToJson()">💾 Export to JSON</button>
+    <button onclick="importJsonFile()">📂 Load filter</button>
+        <button onclick="exportFiltersToJson()">💾 Save filter</button>
+        <hr>
+        <button onclick="groupSelectedItems()">Group Selected</button>
     <ul id="filterList"></ul>
   </section>
 
@@ -26,7 +28,11 @@
     <div id="excel-drop" class="dropzone">Click or Drop Excel File Here</div>
     <input id="excel-file" type="file" accept=".xlsx" style="display: none" />
     <p id="fileStatus">No file uploaded yet.</p>
-    <button onclick="filterReport()">🔍 Filter Report</button>
+    <button onclick="filterBy('makeG5')">Make G5</button>
+<button onclick="filterBy('push')">Push Items</button>
+<button onclick="filterBy('dropzone')">Dropzone</button>
+<button onclick="filterBy('dock')">Dock</button>
+
   </section>
 
   <section>

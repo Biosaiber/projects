@@ -205,4 +205,133 @@ function groupSelectedItems() {
   saveToLocalStorage();
 }
 
+// Filtering functions
+
+function handleExcelFilter(type, rows) {
+  const results = [];
+
+  if (type === "makeG5") {
+    descriptions.forEach(item => {
+      if (Array.isArray(item)) {
+        const matched = rows.filter(row => item.some(d => ((typeof d === 'object' ? d.value : d) || '').toUpperCase() === (row.description || '').toUpperCase()));
+        const locations = [...new Set(matched.map(r => r.location))];
+        if (locations.length > 1) results.push(...matched);
+      }
+    });
+  }
+
+  if (type === "push") {
+    descriptions.forEach(item => {
+      if (Array.isArray(item)) {
+        const pushItems = item.filter(d => typeof d === 'object' && d.push);
+        if (pushItems.length !== item.length) return; // all must have push
+
+        const matched = rows.filter(row =>
+          pushItems.some(pi => pi.value.toUpperCase() === (row.description || '').toUpperCase())
+        );
+
+        const matchedValues = new Set(matched.map(r => (r.description || '').toUpperCase()));
+        const allMatched = pushItems.every(pi => matchedValues.has(pi.value.toUpperCase()));
+
+        if (allMatched) results.push(...matched);
+      } else if (typeof item === 'object' && item.push) {
+        const match = rows.find(r => (r.description || '').toUpperCase() === item.value.toUpperCase());
+        if (match) results.push(match);
+      }
+    });
+  }
+
+  if (type === "dropzone") {
+    results.push(...rows.filter(row => (row.location || '').toLowerCase() === 'run-c-30a'));
+  }
+
+  if (type === "dock") {
+    results.push(...rows.filter(row => (row.location || '').toLowerCase() === 'run-c-11a'));
+  }
+
+  renderResults(results);
+}
+
+function renderResults(results) {
+  const resultContainer = document.getElementById("resultContainer");
+  resultContainer.innerHTML = "";
+  if (!results.length) {
+    resultContainer.textContent = "No results found.";
+    return;
+  }
+  const table = document.createElement("table");
+  const thead = document.createElement("thead");
+  thead.innerHTML = "<tr><th>Description</th><th>Object</th><th>Location</th><th>Status</th></tr>";
+  table.appendChild(thead);
+  const tbody = document.createElement("tbody");
+  results.forEach(r => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${r.description || ""}</td>
+      <td>${r.object || ""}</td>
+      <td>${r.location || ""}</td>
+      <td>${r.status || ""}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+  table.appendChild(tbody);
+  resultContainer.appendChild(table);
+}
+
+function filterBy(type) {
+  const inputFile = document.getElementById("excel-file");
+  const file = inputFile.files[0];
+  if (!file) {
+    alert("Please upload an Excel file first.");
+    return;
+  }
+  const reader = new FileReader();
+  reader.onload = function (e) {
+    const data = new Uint8Array(e.target.result);
+    const workbook = XLSX.read(data, { type: "array" });
+    const sheet = workbook.Sheets[workbook.SheetNames[0]];
+    const rows = XLSX.utils.sheet_to_json(sheet);
+    handleExcelFilter(type, rows);
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+// Click-to-upload Excel drop zone
+const dropZone = document.getElementById("excel-drop");
+dropZone.addEventListener("click", () => {
+  document.getElementById("excel-file").click();
+});
+
+document.getElementById("excel-file").addEventListener("change", (e) => {
+  const file = e.target.files[0];
+  const status = document.getElementById("fileStatus");
+  if (file) {
+    status.textContent = `✅ File loaded: ${file.name}`;
+  } else {
+    status.textContent = "No file uploaded yet.";
+  }
+});
+
+function addDescription() {
+  const input = document.getElementById("descInput");
+  const val = input.value.trim().toUpperCase();
+  if (!val) return;
+
+  const alreadyExists = descriptions.some(item => {
+    if (typeof item === 'string') return item === val;
+    if (typeof item === 'object') return item.value === val;
+    if (Array.isArray(item)) return item.some(el => (typeof el === 'object' ? el.value : el) === val);
+  });
+
+  if (alreadyExists) {
+    alert("This item already exists in the filter list.");
+    return;
+  }
+
+  descriptions.push(val);
+  saveToLocalStorage();
+  input.value = "";
+  renderFilterList();
+}
+
 loadInitialFilters();
