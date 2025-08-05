@@ -102,6 +102,7 @@ function renderFilterList() {
         if (tempGroup.has(value)) innerLi.setAttribute("data-grouping", "on");
 
         const pushBtn = document.createElement("button");
+        pushBtn.className = "pushitem_button";
         pushBtn.textContent = "P";
         pushBtn.onclick = (e) => {
           e.stopPropagation();
@@ -109,6 +110,7 @@ function renderFilterList() {
         };
 
         const groupBtn = document.createElement("button");
+        groupBtn.className = "makeGroup_button";
         groupBtn.textContent = "G";
         groupBtn.onclick = (e) => {
           e.stopPropagation();
@@ -116,6 +118,7 @@ function renderFilterList() {
         };
 
         const removeBtn = document.createElement("button");
+        removeBtn.className = "delete_button";
         removeBtn.textContent = "X";
         removeBtn.onclick = (e) => {
           e.stopPropagation();
@@ -135,6 +138,7 @@ function renderFilterList() {
       });
 
       const ungroupBtn = document.createElement("button");
+      ungroupBtn.className = "ungroup_button";
       ungroupBtn.textContent = "U";
       ungroupBtn.onclick = () => {
         const idx = descriptions.indexOf(groupOrItem);
@@ -155,6 +159,7 @@ function renderFilterList() {
       if (tempGroup.has(value)) li.setAttribute("data-grouping", "on");
 
       const pushBtn = document.createElement("button");
+      pushBtn.className = "pushitem_button";
       pushBtn.textContent = "P";
       pushBtn.onclick = (e) => {
         e.stopPropagation();
@@ -162,6 +167,7 @@ function renderFilterList() {
       };
 
       const groupBtn = document.createElement("button");
+      groupBtn.className = "makeGroup_button";
       groupBtn.textContent = "G";
       groupBtn.onclick = (e) => {
         e.stopPropagation();
@@ -169,6 +175,7 @@ function renderFilterList() {
       };
 
       const removeBtn = document.createElement("button");
+      removeBtn.className = "delete_button";
       removeBtn.textContent = "X";
       removeBtn.onclick = (e) => {
         e.stopPropagation();

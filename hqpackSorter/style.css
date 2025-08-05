@@ -67,28 +67,26 @@ th {
 #filterList li {
   font-size: 10px;
       padding: 4px;
-    border: 1px solid #a2a2a2;
+    border: 1px solid #efefef;
+    background-color: #efefef;
     border-radius: 7px;
     margin: 4px;
         align-items: center;
 }
 
-#filterList li[data-flow="push-item"] {
-  background-color: #eef7aa;
-}
 
 #filterList li button {
   padding: 0;
     margin-top: 0;
     margin-bottom: 0;
    margin-left: 3px;
-    background-color: #ef3931;
-    border: 1px solid #ef3931;
+    border-width: 2px;
 border-radius: 8px;
     font-size: 9px;
-    color: #fff;
     padding-left: 2px;
     padding-right: 2px;
+        line-height: 1.2;
+        color: #fff;
 }
 
 #filterList li.selected {
@@ -99,4 +97,61 @@ border-radius: 8px;
   padding: 0;
   margin-top: 0;
   margin-bottom: 0;
-} 
+}
+
+
+
+/* push item button styles */
+#filterList li button.pushitem_button {
+    background-color: #febc2e;
+  border-color: #febc2e;
+
+}
+#filterList li[data-flow="push-item"] button.pushitem_button {
+  color: #000;
+  background-color: #febc2e6b;
+  border-color: #febc2e6b;
+}
+
+/* make group button styles */
+#filterList li button.makeGroup_button {
+    background-color: #28c840;
+  border-color: #28c840;
+
+}
+#filterList li[data-group="full-set"] button.makeGroup_button {
+display: none;
+}
+/* ungroup button styles */
+#filterList li button.ungroup_button {
+    background-color: #545454;
+  border-color: #545454;
+      margin-right: 4px;
+}
+
+/* make group button styles */
+#filterList li button.delete_button {
+    background-color: #ff5f57;
+  border-color: #ff5f57;
+
+}
+#filterList li[data-group="full-set"] {
+  padding: 0;
+  background-color: #dcf7e0;
+    border-color: #dcf7e0;
+}
+li[data-group="full-set"] > ul {
+    border: 0;
+    border-color: transparent;
+    border-radius: 10px;
+}
+#filterList li[data-group="full-set"] ul {
+  
+    background-color: transparent;
+
+}
+
+#filterList li[data-flow="push-item"] {
+  background-color: #febc2e6b;
+  border-color: #febc2e6b;
+}
