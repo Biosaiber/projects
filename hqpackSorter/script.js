@@ -205,15 +205,25 @@ function groupSelectedItems() {
   saveToLocalStorage();
 }
 
-// Filtering functions
+// --- Filtering functions ---
 
 function handleExcelFilter(type, rows) {
   const results = [];
 
+  // Excluded statuses for the first two filters
+  const excludedStatuses = new Set([
+    'ready for inspection at tech repair',
+    'inspected - waiting for customer feedback',
+    'ready for repair'
+  ]);
+  const normalized = (s) => String(s || '').trim().toLowerCase();
+  const prefiltered = rows.filter(r => !excludedStatuses.has(normalized(r.status)));
+
   if (type === "makeG5") {
+    const working = prefiltered;
     descriptions.forEach(item => {
       if (Array.isArray(item)) {
-        const matched = rows.filter(row => item.some(d => ((typeof d === 'object' ? d.value : d) || '').toUpperCase() === (row.description || '').toUpperCase()));
+        const matched = working.filter(row => item.some(d => ((typeof d === 'object' ? d.value : d) || '').toUpperCase() === (row.description || '').toUpperCase()));
         const locations = [...new Set(matched.map(r => r.location))];
         if (locations.length > 1) results.push(...matched);
       }
@@ -221,21 +231,19 @@ function handleExcelFilter(type, rows) {
   }
 
   if (type === "push") {
+    const working = prefiltered;
     descriptions.forEach(item => {
       if (Array.isArray(item)) {
         const pushItems = item.filter(d => typeof d === 'object' && d.push);
-        if (pushItems.length !== item.length) return; // all must have push
-
-        const matched = rows.filter(row =>
+        if (pushItems.length !== item.length) return; // all in group must be push
+        const matched = working.filter(row =>
           pushItems.some(pi => pi.value.toUpperCase() === (row.description || '').toUpperCase())
         );
-
         const matchedValues = new Set(matched.map(r => (r.description || '').toUpperCase()));
         const allMatched = pushItems.every(pi => matchedValues.has(pi.value.toUpperCase()));
-
         if (allMatched) results.push(...matched);
       } else if (typeof item === 'object' && item.push) {
-        const match = rows.find(r => (r.description || '').toUpperCase() === item.value.toUpperCase());
+        const match = working.find(r => (r.description || '').toUpperCase() === item.value.toUpperCase());
         if (match) results.push(match);
       }
     });
@@ -296,6 +304,204 @@ function filterBy(type) {
   reader.readAsArrayBuffer(file);
 }
 
+// --- NEW: Stock Control ---
+
+function stockControl() {
+  const container = document.getElementById("resultContainer");
+  container.innerHTML = `
+    <form id="stockForm" class="stock-form">
+      <div>
+        <label>Name</label>
+        <input id="sc-name" placeholder="Your name" />
+      </div>
+      <div>
+        <label>Employee number</label>
+        <input id="sc-emp" placeholder="e.g. NL 16054" />
+      </div>
+      <div>
+        <label>Start location</label>
+        <input id="sc-start" placeholder="run-d-13a" />
+      </div>
+      <div>
+        <label>End location</label>
+        <input id="sc-end" placeholder="run-e-01a" />
+      </div>
+      <button type="submit">Generate list</button>
+    </form>
+    <div id="stockResults"></div>
+  `;
+
+  const form = document.getElementById('stockForm');
+  form.onsubmit = (ev) => {
+    ev.preventDefault();
+    runStockControl({
+      name: document.getElementById('sc-name').value.trim(),
+      emp: document.getElementById('sc-emp').value.trim(),
+      start: document.getElementById('sc-start').value.trim(),
+      end: document.getElementById('sc-end').value.trim()
+    });
+  };
+}
+
+function runStockControl(meta) {
+  const file = document.getElementById("excel-file").files[0];
+  if (!file) {
+    alert('Please upload an Excel file first.');
+    return;
+  }
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    const data = new Uint8Array(e.target.result);
+    const wb = XLSX.read(data, { type: 'array' });
+    const sheet = wb.Sheets[wb.SheetNames[0]];
+    const rows = XLSX.utils.sheet_to_json(sheet);
+    buildStockControl(rows, meta);
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+function normalizeLoc(s) {
+  return String(s || '').trim().toUpperCase();
+}
+
+// Natural company ordering for locations like RUN-D-13A
+function parseLocParts(s) {
+  const L = normalizeLoc(s);
+  // RUN-D-13A => [RUN][D][13][A]
+  const m = L.match(/^([A-Z]+)-([A-Z]+)-(\d+)([A-Z]?)/);
+  if (m) {
+    return { p1: m[1], p2: m[2], num: parseInt(m[3], 10), suf: m[4] || '' };
+  }
+  // Fallback
+  const parts = L.split('-');
+  const numMatch = (parts[2] || '').match(/(\d+)([A-Z]?)/) || [];
+  return { p1: parts[0] || L, p2: parts[1] || '', num: parseInt(numMatch[1] || '0', 10), suf: numMatch[2] || '' };
+}
+function locCompare(a, b) {
+  const A = parseLocParts(a), B = parseLocParts(b);
+  return A.p1.localeCompare(B.p1) || A.p2.localeCompare(B.p2) || (A.num - B.num) || A.suf.localeCompare(B.suf);
+}
+
+function formatDate(d = new Date()) {
+  const dd = String(d.getDate()).padStart(2, '0');
+  const mm = String(d.getMonth()+1).padStart(2, '0');
+  const yyyy = d.getFullYear();
+  return `${dd}.${mm}.${yyyy}`;
+}
+
+function buildStockControl(rows, meta) {
+  const start = normalizeLoc(meta.start);
+  const end = normalizeLoc(meta.end);
+  if (!start || !end) {
+    alert('Please fill start and end locations.');
+    return;
+  }
+
+  // Group rows by location
+  const byLoc = new Map();
+  rows.forEach(r => {
+    const loc = normalizeLoc(r.location);
+    if (!loc) return;
+    if (!byLoc.has(loc)) byLoc.set(loc, []);
+    byLoc.get(loc).push(r);
+  });
+
+  // Natural sort and inclusive range
+  const allLocs = Array.from(byLoc.keys()).sort(locCompare);
+  const iStart = allLocs.indexOf(start);
+  const iEnd = allLocs.indexOf(end);
+  if (iStart === -1 || iEnd === -1) {
+    alert('Start or End location not found in the report.');
+    return;
+  }
+  const [from, to] = iStart <= iEnd ? [iStart, iEnd] : [iEnd, iStart];
+  const rangeLocs = allLocs.slice(from, to+1);
+
+  // Sort items inside each location by description then object
+  rangeLocs.forEach(loc => {
+    byLoc.get(loc).sort((a,b)=>
+      (a.description||'').localeCompare(b.description||'') || (a.object||'').localeCompare(b.object||'')
+    );
+  });
+
+  renderStockControl(rangeLocs, byLoc, meta);
+}
+
+function renderStockControl(rangeLocs, byLoc, meta) {
+  const wrap = document.getElementById('stockResults');
+  wrap.innerHTML = '';
+
+  // clickable list of locations
+  const ul = document.createElement('ul');
+  rangeLocs.forEach(loc => {
+    const li = document.createElement('li');
+    const btn = document.createElement('button');
+    btn.textContent = loc;
+    btn.onclick = () => printLocationSheet(loc, byLoc.get(loc) || [], meta);
+    li.appendChild(btn);
+    ul.appendChild(li);
+  });
+  wrap.appendChild(ul);
+}
+
+function printLocationSheet(location, items, meta) {
+  const name = meta.name || '';
+  const emp = meta.emp || '';
+  const dateStr = formatDate(new Date());
+
+  let rowsHtml = '';
+  items.forEach((r, idx) => {
+    rowsHtml += `<tr>
+      <td>${idx+1}</td>
+      <td>${r.description || ''}</td>
+      <td>${r.object || ''}</td>
+      <td>${(r.location||'').toUpperCase()}</td>
+      <td>${r.status || ''}</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>`;
+  });
+
+  const html = `<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>${location} — Stock control</title>
+<style>
+  body{font-family:sans-serif;margin:16px;}
+  h1{margin:0 0 4px 0;font-size:18px}
+  .meta{margin:4px 0 12px 0;font-size:12px}
+  table{border-collapse:collapse;width:100%;}
+  th,td{border:1px solid #333;padding:4px;font-size:12px}
+  th{background:#eee}
+  @media print{ button{display:none} }
+</style>
+</head>
+<body>
+  <button onclick="window.print()">Print</button>
+  <h1>${location}</h1>
+  <div class="meta"><strong>${name}</strong>&nbsp;&nbsp;${emp}&nbsp;&nbsp;${dateStr}</div>
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Description</th>
+        <th>Object</th>
+        <th>Location</th>
+        <th>Status</th>
+        <th>Location CH</th>
+        <th>Status CH</th>
+        <th>Not found</th>
+      </tr>
+    </thead>
+    <tbody>${rowsHtml}</tbody>
+  </table>
+</body></html>`;
+
+  const w = window.open('', '_blank');
+  w.document.open();
+  w.document.write(html);
+  w.document.close();
+}
+
 // Click-to-upload Excel drop zone
 const dropZone = document.getElementById("excel-drop");
 dropZone.addEventListener("click", () => {
@@ -316,18 +522,15 @@ function addDescription() {
   const input = document.getElementById("descInput");
   const val = input.value.trim().toUpperCase();
   if (!val) return;
-
   const alreadyExists = descriptions.some(item => {
     if (typeof item === 'string') return item === val;
     if (typeof item === 'object') return item.value === val;
     if (Array.isArray(item)) return item.some(el => (typeof el === 'object' ? el.value : el) === val);
   });
-
   if (alreadyExists) {
     alert("This item already exists in the filter list.");
     return;
   }
-
   descriptions.push(val);
   saveToLocalStorage();
   input.value = "";

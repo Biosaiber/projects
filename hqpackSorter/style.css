@@ -25,8 +25,6 @@ ul {
 }
 li {
   margin: 0.25rem 0;
-  display: flex;
-  justify-content: space-between;
 }
 .drop-zone {
   border: 2px dashed #888;
@@ -57,9 +55,7 @@ th {
   background: #eee;
 }
 #filterList {
-      display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
+  display: block;
     max-height: 200px;
     overflow-y: scroll;
 }
@@ -70,8 +66,7 @@ th {
     border: 1px solid #efefef;
     background-color: #efefef;
     border-radius: 7px;
-    margin: 4px;
-        align-items: center;
+    display: flex;
 }
 
 
