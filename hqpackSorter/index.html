@@ -1,48 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Excel Report Filter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
+
 </head>
+
 <body>
-  <h1>📁 Excel Report Filter</h1>
+  <header>
+     <img src="hqpack.png" alt="" srcset="" width="80">
+     <h1>Logistic Report Filter</h1>
+  </header>
+  <main>
 
-  <section>
-    <h2>📝 Filter Entries</h2>
-    <input id="descInput" placeholder="Enter description..." />
-    <button onclick="addDescription()">Add</button>
+    <section>
+      <h2>📝 Filter Entries</h2>
+      <input id="descInput" placeholder="Enter description..." />
+      <button onclick="addDescription()">Add</button>
 
-    <hr>
-    <input id="json-upload" type="file" accept="application/json" />
-    <button onclick="importJsonFile()">📂 Load filter</button>
-        <button onclick="exportFiltersToJson()">💾 Save filter</button>
-        <hr>
-        <button onclick="groupSelectedItems()">Group Selected</button>
-    <ul id="filterList"></ul>
-  </section>
+      <hr>
+      <input id="json-upload" type="file" accept="application/json" />
+      <button onclick="importJsonFile()">📂 Load filter</button>
+      <button onclick="exportFiltersToJson()">💾 Save filter</button>
+      <hr>
+      <button onclick="groupSelectedItems()">Group Selected</button>
+      <ul id="filterList"></ul>
+    </section>
 
-  <section>
-    <h2>📂 Upload Excel File</h2>
-    <div id="excel-drop" class="dropzone">Click or Drop Excel File Here</div>
-    <input id="excel-file" type="file" accept=".xlsx" style="display: none" />
-    <p id="fileStatus">No file uploaded yet.</p>
-    <button onclick="filterBy('makeG5')">Make G5</button>
-<button onclick="filterBy('push')">Push Items</button>
-<button onclick="filterBy('dropzone')">Dropzone</button>
-<button onclick="filterBy('dock')">Dock</button>
-<button onclick="stockControl()">Stock Control</button>
+    <section>
+      <h2>📂 Upload Excel File</h2>
+      <div id="excel-drop" class="dropzone">Click or Drop Excel File Here</div>
+      <input id="excel-file" type="file" accept=".xlsx" style="display: none" />
+      <p id="fileStatus">No file uploaded yet.</p>
+      <button onclick="filterBy('makeG5')">Make G5</button>
+      <button onclick="filterBy('push')">Push Items</button>
+      <button onclick="filterBy('dropzone')">Dropzone</button>
+      <button onclick="filterBy('dock')">Dock</button>
+      <button onclick="stockControl()">Stock Control</button>
 
 
-  </section>
+    </section>
 
-  <section>
-    <h2>📋 Filtered Results</h2>
-    <div id="resultContainer"></div>
-  </section>
+    <section>
+      <h2>📋 Filtered Results</h2>
+      <div id="resultContainer"></div>
+    </section>
+  </main>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
   <script src="script.js"></script>
 </body>
+
 </html>
