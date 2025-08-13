@@ -192,7 +192,8 @@ li[data-group="full-set"] > ul {
 }
 
 #filterList li[data-flow="push-item"] {
-      color: #d59100;
+  color: #ffae00;
+  background-color: #fafafa;
 }
 #excel-drop {
   border: 2px dashed #bbb;
@@ -202,4 +203,8 @@ li[data-group="full-set"] > ul {
   text-align: center;
   font: 21pt bold arial;
   color: #bbb;
+}
+
+#filterList li[data-grouping="on"] {
+  border-color: #29c940;
 }
