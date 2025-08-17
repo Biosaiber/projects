@@ -1,0 +1,270 @@
+[
+  {
+    "value": "VDLIM21",
+    "push": true
+  },
+  {
+    "value": "FMI01",
+    "push": true
+  },
+  {
+    "value": "FMI03",
+    "push": true
+  },
+  {
+    "value": "FRENCKEN11",
+    "push": true
+  },
+  {
+    "value": "FRENCKEN12",
+    "push": true
+  },
+  {
+    "value": "FRENCKEN13",
+    "push": true
+  },
+  {
+    "value": "FRENCKEN14",
+    "push": true
+  },
+  {
+    "value": "FRENCKEN15",
+    "push": true
+  },
+  {
+    "value": "GLPRECISION04",
+    "push": true
+  },
+  {
+    "value": "GLPRECISION08",
+    "push": true
+  },
+  {
+    "value": "GLPRECISION09",
+    "push": true
+  },
+  {
+    "value": "GLPRECISION10",
+    "push": true
+  },
+  {
+    "value": "GLPRECISION13",
+    "push": true
+  },
+  {
+    "value": "GLPRECISION17",
+    "push": true
+  },
+  {
+    "value": "GLPRECISION19",
+    "push": true
+  },
+  "GLPRECISION20",
+  "GLPRECISION22",
+  "GLPRECISION23",
+  "GLPRECISION27",
+  "KMWE03",
+  "KMWE08",
+  "KMWE14",
+  "KMWE17",
+  "KMWE23",
+  "KMWE24",
+  "KMWE25",
+  "KMWE27",
+  "KMWE28",
+  "KMWE29",
+  "KMWE31",
+  "KMWE32",
+  "KMWE33",
+  "KMWE37",
+  "IDE20",
+  "MOTION04",
+  "MOTION05",
+  "MOTION06",
+  "MOTION07",
+  "MOTION08",
+  "MOTION09",
+  "MOTION10",
+  "NEWAYS03",
+  "NEWAYS14",
+  "NTS05",
+  "NTS06",
+  "NTS21",
+  "PRODRIVE02",
+  "PRODRIVE05",
+  "PRODRIVE06",
+  "PRODRIVE08",
+  "PRODRIVE11",
+  "PRODRIVE12",
+  "PRODRIVE14",
+  "PNEUTEC04",
+  "PNEUTEC05",
+  "PNEUTEC06",
+  "PNEUTEC07",
+  "PNEUTEC08",
+  "PNEUTEC09",
+  "PNEUTEC10",
+  "PNEUTEC11",
+  "PNEUTEC12",
+  "ROLS02",
+  "ROLS04",
+  "ROLS05",
+  "ROLS06",
+  "ROLS07",
+  "ROLS08",
+  "ROLS09",
+  "ROLS11",
+  "ROLS12",
+  "ROLS13",
+  "ROLS14",
+  "VDLIM02",
+  "VDLIM16",
+  "VHE02",
+  "VHE03",
+  "VHE04",
+  "WIJDEVEN01",
+  "WIJDEVEN02",
+  "WIJDEVEN03",
+  "WILTING01",
+  "WILTING02",
+  "LAMERS01",
+  "LAMERS02",
+  "LAMERS03",
+  "LAMERS04",
+  "LAMERS05",
+  "LAMERS06",
+  "LAMERS07",
+  "LAMERS08",
+  "LAMERS09",
+  "LAMERS10",
+  "LAMERS17",
+  "LAMERS20",
+  "LAMERS21",
+  "LAMERS23",
+  "LAMERS24",
+  "LAMERS25",
+  "LAMERS26",
+  "LAMERS27",
+  "LAMERS28",
+  "LAMERS50",
+  "LAMERS56",
+  "NORMA02",
+  "NORMA09",
+  "NORMA10",
+  "NORMA16",
+  "NORMA17",
+  "NORMA18",
+  "NORMA19",
+  "NORMA20",
+  "NORMA21",
+  "NORMA22",
+  "NORMA23",
+  "NORMA24",
+  "NORMA25",
+  "NORMA26",
+  "NORMA27",
+  "NORMA28",
+  "NORMA29",
+  "NORMA30",
+  "NORMA31",
+  "NORMA32",
+  "NORMA33",
+  "NORMA35",
+  "TECNOTION03",
+  "VDLETGALMELO01",
+  "VDLETGALMELO02",
+  "VDLETGALMELO04",
+  "VDLETGALMELO06",
+  "VDLETGALMELO11",
+  "VDLETGALMELO12",
+  "VDLETGALMELO13",
+  "VDLETGALMELO14",
+  "VDLETGALMELO15",
+  "VDLETGALMELO16",
+  "VDLETGALMELO21",
+  "VDLETGALMELO22",
+  "VDLETGALMELO23",
+  "VDLETGALMELO25",
+  "VDLETGALMELO26",
+  "VDLETGALMELO27",
+  "VDLETGALMELO30",
+  "VDLETGALMELO31",
+  "VDLETGALMELO32",
+  "VDLETGALMELO33",
+  "VDLETGALMELO34",
+  "VDLETGALMELO35",
+  "VDLETGALMELO42",
+  "VDLETGALMELO52",
+  "VDLETGALMELO53",
+  "ASMLB05_1014937",
+  [
+    "ASYS04",
+    "ASYS03"
+  ],
+  [
+    "FRENCKEN02",
+    "FRENCKEN03"
+  ],
+  [
+    "FRENCKEN23",
+    "FRENCKEN22"
+  ],
+  [
+    "IDE19",
+    "IDE18"
+  ],
+  [
+    "NTS28",
+    "NTS07"
+  ],
+  [
+    "PRODRIVE04",
+    "PRODRIVE16"
+  ],
+  [
+    "PRODRIVE09",
+    "PRODRIVE10"
+  ],
+  [
+    "SCHWARZ02",
+    "SCHWARZ01"
+  ],
+  [
+    "VDLKLIMA01",
+    "VDLKLIMA02"
+  ],
+  [
+    {
+      "value": "VACUUMSYSTEMEN02",
+      "push": true
+    },
+    {
+      "value": "VACUUMSYSTEMEN01",
+      "push": true
+    }
+  ],
+  [
+    {
+      "value": "VACUUMSYSTEMEN04",
+      "push": true
+    },
+    {
+      "value": "VACUUMSYSTEMEN03",
+      "push": true
+    }
+  ],
+  [
+    "LAMERS19",
+    "LAMERS18"
+  ],
+  [
+    {
+      "value": "VDLETGALMELO60",
+      "push": true
+    },
+    {
+      "value": "VDLETGALMELO59",
+      "push": true
+    }
+  ]
+]
