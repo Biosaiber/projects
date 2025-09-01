@@ -320,11 +320,11 @@ function stockControl() {
       </div>
       <div>
         <label>Start location</label>
-        <input id="sc-start" placeholder="run-d-13a" />
+        <input id="sc-start" placeholder="run-d-13a or A13" />
       </div>
       <div>
         <label>End location</label>
-        <input id="sc-end" placeholder="run-e-01a" />
+        <input id="sc-end" placeholder="run-e-01a or E01" />
       </div>
       <button type="submit">Generate list</button>
     </form>
@@ -364,15 +364,28 @@ function normalizeLoc(s) {
   return String(s || '').trim().toUpperCase();
 }
 
+// Expand shorthand like "A01" to "RUN-A-01A"; leave full forms intact
+function expandToFullLocation(input) {
+  const t = normalizeLoc(input);
+  // Already full form like RUN-D-13A
+  if (/^[A-Z]+-[A-Z]+-\d+[A-Z]$/.test(t)) return t;
+  // Shorthand: letter + 1-2 digits => pad to 2 digits, suffix A
+  const m = t.match(/^([A-Z])(\d{1,2})$/);
+  if (m) {
+    const zone = m[1];
+    const num = m[2].padStart(2, '0');
+    return `RUN-${zone}-${num}A`;
+  }
+  return t; // fallback: return normalized input
+}
+
 // Natural company ordering for locations like RUN-D-13A
 function parseLocParts(s) {
   const L = normalizeLoc(s);
-  // RUN-D-13A => [RUN][D][13][A]
   const m = L.match(/^([A-Z]+)-([A-Z]+)-(\d+)([A-Z]?)/);
   if (m) {
     return { p1: m[1], p2: m[2], num: parseInt(m[3], 10), suf: m[4] || '' };
   }
-  // Fallback
   const parts = L.split('-');
   const numMatch = (parts[2] || '').match(/(\d+)([A-Z]?)/) || [];
   return { p1: parts[0] || L, p2: parts[1] || '', num: parseInt(numMatch[1] || '0', 10), suf: numMatch[2] || '' };
@@ -390,8 +403,9 @@ function formatDate(d = new Date()) {
 }
 
 function buildStockControl(rows, meta) {
-  const start = normalizeLoc(meta.start);
-  const end = normalizeLoc(meta.end);
+  // Accept shorthand (A01) or full (RUN-A-01A)
+  const start = expandToFullLocation(meta.start);
+  const end = expandToFullLocation(meta.end);
   if (!start || !end) {
     alert('Please fill start and end locations.');
     return;
@@ -487,8 +501,8 @@ function printLocationSheet(location, items, meta) {
         <th>Object</th>
         <th>Location</th>
         <th>Status</th>
-        <th>Location CH</th>
-        <th>Status CH</th>
+        <th>Location CHECK</th>
+        <th>Status CHECK</th>
         <th>Not found</th>
       </tr>
     </thead>
